@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Burato Gioielli</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="./config.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero card">
+        <div>
+          <div class="eyebrow">Burato Gioielli · Rientro Oro</div>
+          <h1>Burato Gioielli</h1>
+          <p class="muted">Pagina unica condivisa tra tutti i negozi. Quotazione aggiornata automaticamente e storico ritiri condiviso.</p>
+        </div>
+        <div class="hero-side">
+          <div class="small-label">Aggiornamento</div>
+          <div id="last-update" class="small-value">—</div>
+          <div class="small-label top-space">Fonte</div>
+          <div class="small-value">Yahoo Finance</div>
+        </div>
+      </header>
+
+      <section class="quote-grid">
+        <article class="quote-card card">
+          <div class="small-label">Quotazione Burato</div>
+          <div id="burato-price" class="big-price">—</div>
+          <div class="muted">Aggiornata automaticamente</div>
+        </article>
+
+        <article class="quote-card card">
+          <div class="small-label">Oro 24kt live</div>
+          <div id="market-price" class="big-subprice">—</div>
+          <div id="market-note" class="muted">Prezzo al grammo</div>
+        </article>
+
+        <article class="quote-card card">
+          <div class="small-label">Totale cumulativo</div>
+          <div id="total-grams" class="big-subprice">0 g</div>
+          <div id="next-alert" class="muted">Prossimo alert a 100 g</div>
+        </article>
+      </section>
+
+      <section class="card form-card">
+        <div class="section-head">
+          <h2>Aggiungi ritiro</h2>
+          <div id="alert-status" class="pill">Pronto</div>
+        </div>
+
+        <form id="entry-form" class="entry-form">
+          <label>
+            <span>Negozio</span>
+            <select id="store" required>
+              <option>Jesolo Piazza Milano</option>
+              <option>Jesolo Bafile</option>
+              <option>Mestre</option>
+              <option>Conegliano</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Grammi ritirati</span>
+            <input id="grams" type="number" min="0.01" step="0.01" placeholder="es. 24.80" required />
+          </label>
+
+          <button id="submit-button" type="submit">Aggiungi ritiro</button>
+        </form>
+
+        <div class="reset-row">
+          <button id="reset-button" class="secondary-button" type="button">Reset dopo fusione</button>
+          <div id="reset-note" class="muted">Azzera tabella e totale corrente, mantenendo lo storico in database.</div>
+        </div>
+      </section>
+
+      <section class="card table-card">
+        <div class="section-head sticky-head">
+          <h2>Storico condiviso</h2>
+          <div id="count-entries" class="muted">0 movimenti</div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Ora</th>
+                <th>Negozio</th>
+                <th class="right">Grammi</th>
+              </tr>
+            </thead>
+            <tbody id="entries-body">
+              <tr>
+                <td colspan="4" class="empty-state">Nessun ritiro registrato</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
